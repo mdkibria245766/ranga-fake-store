@@ -11,33 +11,37 @@ const showProducts = (products) => {
 
   for (const product of allProducts) {
     const image = product.image;
-    // console.log(image);
+   
     const allProduct =document.getElementById('all-products')
     const div = document.createElement("div");
     div.classList.add("product");
-    div.innerHTML = ` <div class="single-product">
+    div.innerHTML = `
+   
+    <div class="single-product">
       <div>
     <img class="product-image" src=${image}></img>
       </div>
       <h3>${product.title}</h3>
+      
       <p>Category: ${product.category}</p>
       <h2>Price: $ ${product.price}</h2>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button>
+      <button onclik="showDetails(${product.description})" id="details-btn" class="btn btn-danger">Details</button>
       </div>
       
       `;
     document.getElementById("all-products").appendChild(div);
-    // allProduct.appendChild(div)
+    
   }
 };
 let count = 0;
 const addToCart = (id, price) => {
   count = count + 1;
   updatePrice("price", price);
-
-  updateTaxAndCharge();
+updateTaxAndCharge();
   updateGrandTotal();
+
+
   document.getElementById("total-Products").innerText = count;
 };
 
@@ -85,12 +89,7 @@ const updateTaxAndCharge = () => {
 const updateGrandTotal = () => {
   const grandTotal =getInputValue("price")+getInputValue("delivery-charge")+getInputValue("total-tax") ;
 document.getElementById("total").innerText = parseFloat(grandTotal.toFixed(2));
-console.log(grandTotal);
+
   };
-
-
-
-
-   
 
 loadProducts();
